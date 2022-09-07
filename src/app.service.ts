@@ -14,6 +14,10 @@ const from = `${config.name} <${config.auth.user}>`;
 export class AppService {
   async sendEmail(option: Params): Promise<string> {
     try {
+      if (!option.to) {
+        throw new Error('参数错误');
+      }
+
       const attachments = await this.initAttachments(option);
       const info = await nodeMailer
         .createTransport({
@@ -32,8 +36,8 @@ export class AppService {
 
       throw new Error(info);
     } catch (e) {
-      console.error(`邮件发送失败: ` + e.response);
-      return 'error ' + e.response;
+      console.error(`邮件发送失败: ` + (e.response || e.toString()));
+      return 'error ' + (e.response || e.toString());
     }
   }
 
