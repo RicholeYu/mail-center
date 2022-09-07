@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  mailer:
+    container_name: mailcenter
+    network_mode: "bridge"
+    build: .
+    restart: "always"
+    ports:
+      - "3000:3000"
+    environment:
+      - MAIL_CENTER_CONFIG=/mail/config/qq.json
+      - MAIL_CENTER_TMP_DIR=/mail/tmp
