@@ -2,6 +2,7 @@ version: '2'
 
 services:
   mailer:
+    image: richole/mailcenter
     container_name: mailcenter
     network_mode: "bridge"
     build: .
